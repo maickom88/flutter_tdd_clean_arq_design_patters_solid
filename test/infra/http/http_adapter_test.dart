@@ -1,36 +1,9 @@
-import 'dart:convert';
-
 import 'package:faker/faker.dart';
 import 'package:http/http.dart';
-import 'package:meta/meta.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'package:flutter_tdd_clean_arq_solid_design_patters/data/http/http.dart';
-
-class HttpAdapter implements HttpClient {
-  final Client client;
-
-  HttpAdapter(this.client);
-
-  Future<Map> request({
-    @required String url,
-    @required String method,
-    Map body,
-  }) async {
-    final headers = {
-      'content-type': 'application/json',
-      'accept': 'application/json',
-    };
-    final jsonBody = body != null ? json.encode(body) : null;
-    final response = await client.post(url, headers: headers, body: jsonBody);
-    if (response.statusCode == 200) {
-      return response.body.isNotEmpty ? json.decode(response.body) : null;
-    } else {
-      return null;
-    }
-  }
-}
+import 'package:flutter_tdd_clean_arq_solid_design_patters/infra/http/http.dart';
 
 class ClintSpy extends Mock implements Client {}
 
