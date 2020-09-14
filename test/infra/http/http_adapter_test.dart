@@ -107,5 +107,18 @@ void main() {
 
       expect(furure, throwsA(HttpError.unauthorized));
     });
+    test('Should return forbidden if post returns 401', () async {
+      mockResponse(403);
+      final furure = sut.request(url: url, method: 'post');
+
+      expect(furure, throwsA(HttpError.forbidden));
+    });
+
+    test('Should return AnauthorizedError if post returns 404', () async {
+      mockResponse(404);
+      final furure = sut.request(url: url, method: 'post');
+
+      expect(furure, throwsA(HttpError.notFound));
+    });
   });
 }
