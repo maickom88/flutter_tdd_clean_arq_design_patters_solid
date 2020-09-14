@@ -2,11 +2,11 @@ import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:flutter_tdd_clean_arq_solid_design_patters/data/http/http.dart';
+import 'package:flutter_tdd_clean_arq_solid_design_patters/data/usecases/usecases.dart';
+
 import 'package:flutter_tdd_clean_arq_solid_design_patters/domain/helpers/helpers.dart';
 import 'package:flutter_tdd_clean_arq_solid_design_patters/domain/usecases/usecases.dart';
-
-import 'package:flutter_tdd_clean_arq_solid_design_patters/data/usecases/usecases.dart';
-import 'package:flutter_tdd_clean_arq_solid_design_patters/data/http/http.dart';
 
 class HttpClientSpy extends Mock implements HttpClient {}
 
@@ -117,5 +117,21 @@ void main() {
     final account = await sut.auth(params);
 
     expect(account.token, accessToken);
+  });
+
+  test(
+      'Should throw UnexpectedError if HttpClient returns 200 with invalid data',
+      () async {
+    when(
+      httpClient.request(
+        url: anyNamed('url'),
+        method: anyNamed('method'),
+        body: anyNamed('body'),
+      ),
+    ).thenAnswer((_) async => {'invalid_key': 'invalid_value'});
+
+    final future = sut.auth(params);
+
+    expect(future, throwsA(DomainError.unexpected));
   });
 }
