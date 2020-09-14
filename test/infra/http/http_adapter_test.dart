@@ -94,5 +94,11 @@ void main() {
 
       expect(furure, throwsA(HttpError.badRequest));
     });
+    test('Should return ServerError if post returns 500', () async {
+      mockResponse(500);
+      final furure = sut.request(url: url, method: 'post');
+
+      expect(furure, throwsA(HttpError.serverError));
+    });
   });
 }
