@@ -21,7 +21,7 @@ class RemoteAuthentication implements Authentication {
     try {
       final httpResponse =
           await httpClient.request(url: url, method: 'post', body: body);
-      return RemoteAccountEntity.fromJson(httpResponse).toEntity();
+      return RemoteAccountModel.fromJson(httpResponse).toEntity();
     } on HttpError catch (error) {
       throw error == HttpError.unauthorized
           ? DomainError.invalidCredencials
