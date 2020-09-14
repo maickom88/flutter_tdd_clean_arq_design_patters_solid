@@ -21,12 +21,16 @@ class HttpAdapter {
 class ClintSpy extends Mock implements Client {}
 
 void main() {
+  ClintSpy client;
+  HttpAdapter sut;
+  String url;
+  setUp(() {
+    client = ClintSpy();
+    sut = HttpAdapter(client);
+    url = faker.internet.httpUrl();
+  });
   group('post', () {
     test('Should call post with correct values', () async {
-      final client = ClintSpy();
-      final sut = HttpAdapter(client);
-      final url = faker.internet.httpUrl();
-
       await sut.request(url: url, method: 'post');
 
       verify(client.post(
