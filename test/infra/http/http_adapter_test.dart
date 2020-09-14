@@ -100,5 +100,12 @@ void main() {
 
       expect(furure, throwsA(HttpError.serverError));
     });
+
+    test('Should return AnauthorizedError if post returns 401', () async {
+      mockResponse(401);
+      final furure = sut.request(url: url, method: 'post');
+
+      expect(furure, throwsA(HttpError.unauthorized));
+    });
   });
 }
