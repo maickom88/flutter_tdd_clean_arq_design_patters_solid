@@ -114,7 +114,7 @@ void main() {
       expect(furure, throwsA(HttpError.forbidden));
     });
 
-    test('Should return AnauthorizedError if post returns 404', () async {
+    test('Should return notFoundError if post returns 404', () async {
       mockResponse(404);
       final furure = sut.request(url: url, method: 'post');
 
