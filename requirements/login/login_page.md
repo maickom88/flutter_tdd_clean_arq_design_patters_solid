@@ -13,7 +13,7 @@
 10. ✅ Habilitar o botão de fazer login se todos os campos forem válidos
 11. ✅ Desabilitar o botão de fazer login se todos os campos forem inválidos
 12. Exibir loading no inicio da ação de login
-13. Autenticar usuario com email e senha informados no formulario
+13. ✅ Autenticar usuario com email e senha informados no formulario
 14. Exibir mensagem  de erro caso o login falhe
 15. Gravar o token do usuario para a tela de lista de enquetes
 16. Redirecionar o usuario para tela de lista de enquentes
